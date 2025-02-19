@@ -22,14 +22,56 @@ This project implements the Factory Pattern where an OrderBookFactory contract c
 
 ## Development Setup
 
-1. Deploy tokens and factory contract
-forge script script/Deploy.s.sol --broadcast --rpc-url $RPC_URL --private-key $PRIVATE_KEY
-2. Configure environment variables based on the deployment output
-3. Simulate orders
-forge script script/SimulateOrders.s.sol --broadcast --rpc-url $RPC_URL --private-key $PRIVATE_KEY
-4. Configure environment variables for indexer
-5. Run indexer
+## Deployment Steps
 
+### 1. Deploy Tokens and Factory Contract
+Deploy the initial contracts including mock tokens and factory:
+
+```bash
+forge script script/Deploy.s.sol --broadcast \
+    --rpc-url $RPC_URL \
+    --private-key $PRIVATE_KEY
+```
+
+After deployment, you'll receive addresses for:
+- Quote Asset
+- Base Asset
+- Orderbook Factory
+- Orderbook
+
+### 2. Configure Environment Variables
+Update your `.env` file with the deployed contract addresses:
+
+```
+QUOTE_TOKEN_ADDRESS=<deployed_quote_token_address>
+BASE_TOKEN_ADDRESS=<deployed_base_token_address>
+ORDERBOOK_FACTORY_ADDRESS=<deployed_factory_address>
+ORDERBOOK_ADDRESS=<deployed_orderbook_address>
+```
+
+### 3. Simulate Orders
+Run the order simulation script to create test trading activity:
+
+```bash
+forge script script/SimulateOrders.s.sol --broadcast \
+    --rpc-url $RPC_URL \
+    --private-key $PRIVATE_KEY
+```
+
+### 4. Configure Indexer Environment
+Create a new `.env.indexer` file:
+
+```
+ORDERBOOK_FACTORY_ADDRESS=<deployed_factory_address>
+STARTED_BLOCK=<block_number>
+```
+
+### 5. Run Indexer
+Start the indexer service:
+
+```bash
+pnpm dev
+```
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
