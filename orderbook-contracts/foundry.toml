@@ -1,0 +1,15 @@
+[profile.default]
+src = "src"
+out = "out"
+via_ir = true
+libs = ["lib"]
+auto_detect_solc = false
+block_timestamp = 1_680_220_800 # March 31, 2023 at 00:00 GMT
+bytecode_hash = "none"
+evm_version = "shanghai"        # See https://www.evmdiff.com/features?name=PUSH0&kind=opcode
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+
+[rpc_endpoints]
+arbitrum = "https://rpc.ankr.com/arbitrum"
+mainnet = "https://rpc.ankr.com/eth"
